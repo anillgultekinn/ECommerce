@@ -13,16 +13,26 @@ public static class BusinessServiceRegistration
 {
     public static IServiceCollection AddBusinessServices(this IServiceCollection services)
     {
-        services.AddScoped<IAuthService, AuthManager>();
         services.AddScoped<ITokenHelper, JwtHelper>();
-        services.AddScoped<IUserService, UserManager>();
         services.AddScoped<IAccountService, AccountManager>();
+        services.AddScoped<IAddressService, AddressManager>();
+        services.AddScoped<IAuthService, AuthManager>();
+        services.AddScoped<IBrandService, BrandManager>();
+        services.AddScoped<ICategoryService, CategoryManager>();
+        services.AddScoped<ICityService, CityManager>();
+        services.AddScoped<IColorService, ColorManager>();
+        services.AddScoped<ICountryService, CountryManager>();
+        services.AddScoped<IDistrictService, DistrictManager>();
+        services.AddScoped<IGenderService, GenderManager>();
         services.AddScoped<IOperationClaimService, OperationClaimManager>();
+        services.AddScoped<IProductService, ProductManager>();
+        services.AddScoped<ISizeService, SizeManager>();
         services.AddScoped<IUserOperationClaimService, UserOperationClaimManager>();
+        services.AddScoped<IUserService, UserManager>();
 
 
         services.AddScoped<IOperationClaimService, OperationClaimManager>();
-   
+
 
 
 

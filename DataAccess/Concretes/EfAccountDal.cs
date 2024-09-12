@@ -5,9 +5,9 @@ using Entities.Concretes;
 
 namespace DataAccess.Concretes;
 
-public class EfAccountDal : EfRepositoryBase<Account, Guid, TimeLineContext>, IAccountDal
+public class EfAccountDal : EfRepositoryBase<Account, Guid, ECommerceContext>, IAccountDal
 {
-    public EfAccountDal(TimeLineContext context) : base(context)
+    public EfAccountDal(ECommerceContext context) : base(context)
     {
     }
 }

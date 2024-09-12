@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes
 {
-    public class EfUserDal : EfRepositoryBase<User, Guid, TimeLineContext>, IUserDal
+    public class EfUserDal : EfRepositoryBase<User, Guid, ECommerceContext>, IUserDal
     {
-        public EfUserDal(TimeLineContext context) : base(context)
+        public EfUserDal(ECommerceContext context) : base(context)
         {
         }
 
