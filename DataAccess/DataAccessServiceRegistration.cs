@@ -22,7 +22,6 @@ public static class DataAccessServiceRegistration
         services.AddScoped<IColorDal, EfColorDal>();
         services.AddScoped<ICountryDal, EfCountryDal>();
         services.AddScoped<IDistrictDal, EfDistrictDal>();
-        services.AddScoped<IGenderDal, EfGenderDal>();
         services.AddScoped<IOperationClaimDal, EfOperationClaimDal>();
         services.AddScoped<IProductDal, EfProductDal>();
         services.AddScoped<ISizeDal, EfSizeDal>();

@@ -18,7 +18,6 @@ public class ECommerceContext : DbContext
     public DbSet<Color> Colors { get; set; }
     public DbSet<Country> Countries { get; set; }
     public DbSet<District> Districts { get; set; }
-    public DbSet<Gender> Genders{ get; set; }
     public DbSet<OperationClaim> OperationClaims { get; set; }
     public DbSet<Product> Products{ get; set; }
     public DbSet<Size> Sizes{ get; set; }

@@ -9,6 +9,5 @@ public class GetListProductResponse
     public Guid BrandId { get; set; }
     public Guid ColorId { get; set; }
     public Guid SizeId { get; set; }
-    public Guid GenderId { get; set; }
     public decimal Price { get; set; }
 }

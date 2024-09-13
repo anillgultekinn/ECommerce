@@ -23,7 +23,6 @@ public static class BusinessServiceRegistration
         services.AddScoped<IColorService, ColorManager>();
         services.AddScoped<ICountryService, CountryManager>();
         services.AddScoped<IDistrictService, DistrictManager>();
-        services.AddScoped<IGenderService, GenderManager>();
         services.AddScoped<IOperationClaimService, OperationClaimManager>();
         services.AddScoped<IProductService, ProductManager>();
         services.AddScoped<ISizeService, SizeManager>();
