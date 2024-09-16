@@ -20,10 +20,10 @@ public class ECommerceContext : DbContext
     public DbSet<District> Districts { get; set; }
     public DbSet<OperationClaim> OperationClaims { get; set; }
     public DbSet<ProductAttribute> ProductAttributes { get; set; }
+    public DbSet<ProductAttributeValue> ProductAttributeValues { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<ProductDetail> ProductDetails { get; set; }
     public DbSet<ProductImage> ProductImages { get; set; }
-    public DbSet<Size> Sizes { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 

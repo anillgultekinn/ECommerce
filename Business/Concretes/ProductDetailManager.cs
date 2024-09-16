@@ -6,6 +6,7 @@ using Business.Rules.BusinessRules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes;
 
@@ -42,7 +43,10 @@ public class ProductDetailManager : IProductDetailService
 
     public async Task<GetProductDetailResponse> GetByIdAsync(Guid id)
     {
-        var productDetail = await _productDetailDal.GetAsync(predicate: p => p.Id == id);
+        var productDetail = await _productDetailDal.GetAsync(
+               include: p => p
+             .Include(p => p.Product),
+            predicate: p => p.Id == id);
         var mappedProductDetail = _mapper.Map<GetProductDetailResponse>(productDetail);
         return mappedProductDetail;
     }
@@ -50,6 +54,8 @@ public class ProductDetailManager : IProductDetailService
     public async Task<IPaginate<GetListProductDetailResponse>> GetListAsync(PageRequest pageRequest)
     {
         var productDetails = await _productDetailDal.GetListAsync(
+             include: p => p
+             .Include(p => p.Product),
          index: pageRequest.PageIndex,
          size: pageRequest.PageSize);
         var mappedProductDetails = _mapper.Map<Paginate<GetListProductDetailResponse>>(productDetails);

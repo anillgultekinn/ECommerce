@@ -25,10 +25,10 @@ public static class BusinessServiceRegistration
         services.AddScoped<IDistrictService, DistrictManager>();
         services.AddScoped<IOperationClaimService, OperationClaimManager>();
         services.AddScoped<IProductAttributeService, ProductAttributeManager>();
+        services.AddScoped<IProductAttributeValueService, ProductAttributeValueManager>();
         services.AddScoped<IProductDetailService, ProductDetailManager>();
         services.AddScoped<IProductImageService, ProductImageManager>();
         services.AddScoped<IProductService, ProductManager>();
-        services.AddScoped<ISizeService, SizeManager>();
         services.AddScoped<IUserOperationClaimService, UserOperationClaimManager>();
         services.AddScoped<IUserService, UserManager>();
 

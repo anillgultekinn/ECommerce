@@ -18,7 +18,11 @@ public class ProductDetailProfile : Profile
         CreateMap<ProductDetail, DeletedProductDetailResponse>().ReverseMap();
 
         CreateMap<IPaginate<ProductDetail>, Paginate<GetListProductDetailResponse>>().ReverseMap();
-        CreateMap<ProductDetail, GetListProductDetailResponse>().ReverseMap();
+
+        CreateMap<ProductDetail, GetListProductDetailResponse>()
+            .ForMember(destinationMember: response => response.ProductTitle,
+             memberOptions: opt => opt.MapFrom(p => p.Product.Title)).ReverseMap();
+
         CreateMap<ProductDetail, GetProductDetailResponse>().ReverseMap();
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Business.Abstracts;
-using Business.Dtos.Requests.SizeRequests;
+using Business.Dtos.Requests.ProductAttributeValueRequests;
 using Core.CrossCuttingConcerns.Caching;
 using Core.CrossCuttingConcerns.Logging;
 using Core.CrossCuttingConcerns.Logging.SeriLog.Logger;
@@ -10,13 +10,13 @@ namespace WebAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class SizesController : ControllerBase
+public class ProductAttributeValuesController : ControllerBase
 {
-    ISizeService _sizeService;
+    IProductAttributeValueService _productAttributeValueService;
 
-    public SizesController(ISizeService sizeService)
+    public ProductAttributeValuesController(IProductAttributeValueService productAttributeValueService)
     {
-        _sizeService = sizeService;
+        _productAttributeValueService = productAttributeValueService;
     }
 
     [Logging(typeof(MsSqlLogger))]
@@ -25,7 +25,7 @@ public class SizesController : ControllerBase
     [HttpGet("GetList")]
     public async Task<IActionResult> GetListAsync([FromQuery] PageRequest pageRequest)
     {
-        var result = await _sizeService.GetListAsync(pageRequest);
+        var result = await _productAttributeValueService.GetListAsync(pageRequest);
         return Ok(result);
     }
 
@@ -35,39 +35,39 @@ public class SizesController : ControllerBase
     [HttpGet("GetById")]
     public async Task<IActionResult> GetByIdAsync(Guid id)
     {
-        var result = await _sizeService.GetByIdAsync(id);
+        var result = await _productAttributeValueService.GetByIdAsync(id);
         return Ok(result);
     }
 
 
     [Logging(typeof(MsSqlLogger))]
     [Logging(typeof(FileLogger))]
-    [CacheRemove("Sizes.Get")]
+    [CacheRemove("ProductAttributeValues.Get")]
     [HttpPost]
-    public async Task<IActionResult> AddAsync([FromBody] CreateSizeRequest createSizeRequest)
+    public async Task<IActionResult> AddAsync([FromBody] CreateProductAttributeValueRequest createProductAttributeValueRequest)
     {
-        var result = await _sizeService.AddAsync(createSizeRequest);
+        var result = await _productAttributeValueService.AddAsync(createProductAttributeValueRequest);
         return Ok(result);
     }
 
 
     [Logging(typeof(MsSqlLogger))]
     [Logging(typeof(FileLogger))]
-    [CacheRemove("Sizes.Get")]
+    [CacheRemove("ProductAttributeValues.Get")]
     [HttpPut]
-    public async Task<IActionResult> UpdateAsync([FromBody] UpdateSizeRequest updateSizeRequest)
+    public async Task<IActionResult> UpdateAsync([FromBody] UpdateProductAttributeValueRequest updateProductAttributeValueRequest)
     {
-        var result = await _sizeService.UpdateAsync(updateSizeRequest);
+        var result = await _productAttributeValueService.UpdateAsync(updateProductAttributeValueRequest);
         return Ok(result);
     }
 
     [Logging(typeof(MsSqlLogger))]
     [Logging(typeof(FileLogger))]
-    [CacheRemove("Sizes.Get")]
+    [CacheRemove("ProductAttributeValues.Get")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute] Guid id)
     {
-        var result = await _sizeService.DeleteAsync(id);
+        var result = await _productAttributeValueService.DeleteAsync(id);
         return Ok(result);
     }
 }

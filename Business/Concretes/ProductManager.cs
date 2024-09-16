@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.ProductRequests;
-using Business.Dtos.Requests.ProductRequests;
-using Business.Dtos.Responses.ProductResponses;
 using Business.Dtos.Responses.ProductResponses;
 using Business.Rules.BusinessRules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using DataAccess.Concretes;
 using Entities.Concretes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes;
 
@@ -46,7 +44,12 @@ public class ProductManager : IProductService
 
     public async Task<GetProductResponse> GetByIdAsync(Guid id)
     {
-        var product = await _productDal.GetAsync(predicate: p => p.Id == id);
+        var product = await _productDal.GetAsync(
+             include: p => p
+             .Include(p => p.Category)
+             .Include(p => p.Brand),
+            predicate: p => p.Id == id
+            );
         var mappedProduct = _mapper.Map<GetProductResponse>(product);
         return mappedProduct;
     }
@@ -54,8 +57,13 @@ public class ProductManager : IProductService
     public async Task<IPaginate<GetListProductResponse>> GetListAsync(PageRequest pageRequest)
     {
         var products = await _productDal.GetListAsync(
+             include: p => p
+             .Include(p => p.Category)
+             .Include(p => p.Brand),
          index: pageRequest.PageIndex,
-         size: pageRequest.PageSize);
+         size: pageRequest.PageSize
+
+         );
         var mappedProducts = _mapper.Map<Paginate<GetListProductResponse>>(products);
         return mappedProducts;
     }

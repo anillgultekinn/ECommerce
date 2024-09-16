@@ -10,16 +10,17 @@ public class ProductDetailConfiguration : IEntityTypeConfiguration<ProductDetail
     {
         builder.ToTable("ProductDetails").HasKey(p => p.Id);
 
-        builder.Property(p => p.Id).HasColumnName("Id").IsRequired();
-        builder.Property(p => p.ProductId).HasColumnName("ProductId").IsRequired();
-        builder.Property(p => p.ProductAttributeId).HasColumnName("ProductAttributeId").IsRequired();
-        builder.Property(p => p.Value).HasColumnName("Value").IsRequired();
-        builder.Property(p => p.UnitPrice).HasColumnName("UnitPrice").IsRequired();
-        builder.Property(p => p.UnitsInStock).HasColumnName("UnitsInStock").IsRequired();
+        builder.Property(pd => pd.Id).HasColumnName("Id").IsRequired();
+        builder.Property(pd => pd.ProductId).HasColumnName("ProductId").IsRequired();
+        builder.Property(pd => pd.UnitPrice).HasColumnName("UnitPrice").IsRequired();
+        builder.Property(pd => pd.UnitsInStock).HasColumnName("UnitsInStock").IsRequired();
 
 
-        builder.HasOne(p => p.Product);
-        builder.HasOne(p => p.ProductAttribute);      
+        builder.HasOne(pd => pd.Product);
+
+        builder.HasMany(pd => pd.ProductAttributeValues)
+            .WithOne(pd => pd.ProductDetail)
+            .HasForeignKey(pd => pd.ProductDetailId);
 
         builder.HasQueryFilter(op => !op.DeletedDate.HasValue);
 

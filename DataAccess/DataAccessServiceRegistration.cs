@@ -24,10 +24,10 @@ public static class DataAccessServiceRegistration
         services.AddScoped<IDistrictDal, EfDistrictDal>();
         services.AddScoped<IOperationClaimDal, EfOperationClaimDal>();
         services.AddScoped<IProductAttributeDal, EfProductAttributeDal>();
+        services.AddScoped<IProductAttributeValueDal, EfProductAttributeValueDal>();
         services.AddScoped<IProductDal, EfProductDal>();
         services.AddScoped<IProductDetailDal, EfProductDetailDal>();
         services.AddScoped<IProductImageDal, EfProductImageDal>();
-        services.AddScoped<ISizeDal, EfSizeDal>();
         services.AddScoped<IUserDal, EfUserDal>();
         services.AddScoped<IUserOperationClaimDal, EfUserOperationClaimDal>();
 
