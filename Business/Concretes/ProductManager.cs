@@ -57,13 +57,15 @@ public class ProductManager : IProductService
     public async Task<IPaginate<GetListProductResponse>> GetListAsync(PageRequest pageRequest)
     {
         var products = await _productDal.GetListAsync(
-             include: p => p
-             .Include(p => p.Category)
-             .Include(p => p.Brand),
-         index: pageRequest.PageIndex,
-         size: pageRequest.PageSize
-
-         );
+        include: p => p
+            .Include(p => p.ProductDetails)
+                .ThenInclude(pd => pd.ProductAttributeValues)
+                    .ThenInclude(pav => pav.ProductAttribute)
+            .Include(p => p.Category)
+            .Include(p => p.Brand),
+        index: pageRequest.PageIndex,
+        size: pageRequest.PageSize
+    );
         var mappedProducts = _mapper.Map<Paginate<GetListProductResponse>>(products);
         return mappedProducts;
     }

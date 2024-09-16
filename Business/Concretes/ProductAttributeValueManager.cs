@@ -6,6 +6,7 @@ using Business.Rules.BusinessRules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes;
 
@@ -49,6 +50,8 @@ public class ProductAttributeValueManager : IProductAttributeValueService
     public async Task<IPaginate<GetListProductAttributeValueResponse>> GetListAsync(PageRequest pageRequest)
     {
         var productAttributeValues = await _productAttributeValueDal.GetListAsync(
+            include: p => p
+            .Include(p => p.ProductAttribute),
          index: pageRequest.PageIndex,
          size: pageRequest.PageSize);
         var mappedProductAttributeValues = _mapper.Map<Paginate<GetListProductAttributeValueResponse>>(productAttributeValues);

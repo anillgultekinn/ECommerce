@@ -1,4 +1,6 @@
-﻿namespace Business.Dtos.Responses.ProductResponses;
+﻿using Business.Dtos.Responses.ProductDetailResponses;
+
+namespace Business.Dtos.Responses.ProductResponses;
 
 public class GetListProductResponse
 {
@@ -9,4 +11,5 @@ public class GetListProductResponse
     public string CategoryName { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
+    public ICollection<GetListProductDetailResponse> ProductDetails { get; set; }
 }

@@ -55,7 +55,9 @@ public class ProductDetailManager : IProductDetailService
     {
         var productDetails = await _productDetailDal.GetListAsync(
              include: p => p
-             .Include(p => p.Product),
+             .Include(p => p.Product)
+             .Include(p => p.ProductAttributeValues)
+                .ThenInclude(p => p.ProductAttribute),
          index: pageRequest.PageIndex,
          size: pageRequest.PageSize);
         var mappedProductDetails = _mapper.Map<Paginate<GetListProductDetailResponse>>(productDetails);
