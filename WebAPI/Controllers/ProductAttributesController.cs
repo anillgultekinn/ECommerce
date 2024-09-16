@@ -1,22 +1,23 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.Requests.ProductRequests;
 using Core.CrossCuttingConcerns.Caching;
-using Core.CrossCuttingConcerns.Logging;
 using Core.CrossCuttingConcerns.Logging.SeriLog.Logger;
+using Core.CrossCuttingConcerns.Logging;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
+using Business.Dtos.Requests.ProductAttributeRequests;
 
 namespace WebAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ProductsController : ControllerBase
+public class ProductAttributesController : ControllerBase
 {
-    IProductService _productService;
+    IProductAttributeService _productAttributeService;
 
-    public ProductsController(IProductService productService)
+    public ProductAttributesController(IProductAttributeService productAttributeService)
     {
-        _productService = productService;
+        _productAttributeService = productAttributeService;
     }
 
 
@@ -26,7 +27,7 @@ public class ProductsController : ControllerBase
     [HttpGet("GetList")]
     public async Task<IActionResult> GetListAsync([FromQuery] PageRequest pageRequest)
     {
-        var result = await _productService.GetListAsync(pageRequest);
+        var result = await _productAttributeService.GetListAsync(pageRequest);
         return Ok(result);
     }
 
@@ -36,39 +37,40 @@ public class ProductsController : ControllerBase
     [HttpGet("GetById")]
     public async Task<IActionResult> GetByIdAsync(Guid id)
     {
-        var result = await _productService.GetByIdAsync(id);
+        var result = await _productAttributeService.GetByIdAsync(id);
         return Ok(result);
     }
 
 
+
     [Logging(typeof(MsSqlLogger))]
     [Logging(typeof(FileLogger))]
-    [CacheRemove("Products.Get")]
+    [CacheRemove("ProductAttributes.Get")]
     [HttpPost]
-    public async Task<IActionResult> AddAsync([FromBody] CreateProductRequest createProductRequest)
+    public async Task<IActionResult> AddAsync([FromBody] CreateProductAttributeRequest createProductAttributeRequest)
     {
-        var result = await _productService.AddAsync(createProductRequest);
+        var result = await _productAttributeService.AddAsync(createProductAttributeRequest);
         return Ok(result);
     }
 
 
     [Logging(typeof(MsSqlLogger))]
     [Logging(typeof(FileLogger))]
-    [CacheRemove("Products.Get")]
+    [CacheRemove("ProductAttributes.Get")]
     [HttpPut]
-    public async Task<IActionResult> UpdateAsync([FromBody] UpdateProductRequest updateProductRequest)
+    public async Task<IActionResult> UpdateAsync([FromBody] UpdateProductAttributeRequest updateProductAttributeRequest)
     {
-        var result = await _productService.UpdateAsync(updateProductRequest);
+        var result = await _productAttributeService.UpdateAsync(updateProductAttributeRequest);
         return Ok(result);
     }
 
     [Logging(typeof(MsSqlLogger))]
     [Logging(typeof(FileLogger))]
-    [CacheRemove("Products.Get")]
+    [CacheRemove("ProductAttributes.Get")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute] Guid id)
     {
-        var result = await _productService.DeleteAsync(id);
+        var result = await _productAttributeService.DeleteAsync(id);
         return Ok(result);
     }
 }

@@ -16,7 +16,10 @@ public class BrandConfiguration : IEntityTypeConfiguration<Brand>
         builder.HasIndex(indexExpression: a => a.Id, name: "UK_Id").IsUnique();
         builder.HasIndex(indexExpression: a => a.Name, name: "UK_Name").IsUnique();
 
-        builder.HasMany(b => b.Products);
+
+        builder.HasMany(b => b.Products)
+                 .WithOne(p => p.Brand) // Brand ile Product arasında ilişki
+                 .HasForeignKey(p => p.BrandId); // Product'ta BrandId anahtar alanı olacak
 
 
         builder.HasQueryFilter(a => !a.DeletedDate.HasValue);

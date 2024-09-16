@@ -4,18 +4,13 @@ namespace Entities.Concretes;
 
 public class Product : Entity<Guid>
 {
+    public Guid BrandId { get; set; }
+    public Guid CategoryId { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
-    public Guid CategoryId { get; set; }
-    public Guid BrandId { get; set; }
-    public Guid ColorId { get; set; }
-    public Guid SizeId { get; set; }
-    public decimal Price { get; set; }
 
     public Category Category { get; set; }
     public Brand Brand { get; set; }
-    public Color Color { get; set; }
-    public Size Size { get; set; }
-    public string ImageUrl { get; set; }
-
+    public virtual ICollection<ProductDetail> ProductDetails { get; set; }
+    public virtual ICollection<ProductImage> ProductImages { get; set; }
 }

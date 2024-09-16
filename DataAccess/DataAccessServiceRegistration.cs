@@ -13,7 +13,7 @@ public static class DataAccessServiceRegistration
     {
         services.AddDbContext<ECommerceContext>(options => options.UseSqlServer(configuration.GetConnectionString("ECommerce")));
 
-      
+
         services.AddScoped<IAccountDal, EfAccountDal>();
         services.AddScoped<IAddressDal, EfAddressDal>();
         services.AddScoped<IBrandDal, EfBrandDal>();
@@ -23,7 +23,10 @@ public static class DataAccessServiceRegistration
         services.AddScoped<ICountryDal, EfCountryDal>();
         services.AddScoped<IDistrictDal, EfDistrictDal>();
         services.AddScoped<IOperationClaimDal, EfOperationClaimDal>();
+        services.AddScoped<IProductAttributeDal, EfProductAttributeDal>();
         services.AddScoped<IProductDal, EfProductDal>();
+        services.AddScoped<IProductDetailDal, EfProductDetailDal>();
+        services.AddScoped<IProductImageDal, EfProductImageDal>();
         services.AddScoped<ISizeDal, EfSizeDal>();
         services.AddScoped<IUserDal, EfUserDal>();
         services.AddScoped<IUserOperationClaimDal, EfUserOperationClaimDal>();

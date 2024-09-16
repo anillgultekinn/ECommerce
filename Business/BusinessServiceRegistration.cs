@@ -24,6 +24,9 @@ public static class BusinessServiceRegistration
         services.AddScoped<ICountryService, CountryManager>();
         services.AddScoped<IDistrictService, DistrictManager>();
         services.AddScoped<IOperationClaimService, OperationClaimManager>();
+        services.AddScoped<IProductAttributeService, ProductAttributeManager>();
+        services.AddScoped<IProductDetailService, ProductDetailManager>();
+        services.AddScoped<IProductImageService, ProductImageManager>();
         services.AddScoped<IProductService, ProductManager>();
         services.AddScoped<ISizeService, SizeManager>();
         services.AddScoped<IUserOperationClaimService, UserOperationClaimManager>();
